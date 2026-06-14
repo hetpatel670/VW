@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>AgriVerse AI | Agriculture Digital Twin</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="style.css" />
+</head>
+<body>
+  <div class="orb orb-a"></div><div class="orb orb-b"></div><div class="orb orb-c"></div>
+  <aside class="sidebar glass">
+    <div class="brand"><span class="logo">🌾</span><div><strong>AgriVerse AI</strong><small>Digital Twin Platform</small></div></div>
+    <nav id="nav"></nav>
+    <button id="themeToggle" class="ghost full">🌙 Toggle theme</button>
+  </aside>
+
+  <main class="app-shell">
+    <header class="topbar glass">
+      <div><p class="eyebrow">Complete virtual farming command center</p><h1 id="pageTitle">Dashboard</h1></div>
+      <div class="top-actions"><select id="farmSwitch" title="Active farm"></select><button id="simulateDay" class="primary">Simulate 1 Day</button><button id="simulateWeek" class="secondary">+7 Days</button><button id="saveAll" class="ghost">Save</button></div>
+    </header>
+
+    <section class="hero glass section active" data-section="dashboard">
+      <div class="hero-copy"><p class="eyebrow">Farm OS • AI Ready • Local-first</p><h2>Build, simulate, and optimize profitable digital farms.</h2><p>Create multiple farms, assign each one a virtual farm manager, control weather manually or automatically, and run deterministic side-by-side experiments against the selected farm.</p><div class="hero-actions"><button class="primary" data-jump="farm">Create Farm</button><button class="secondary" data-jump="experiments">Run Experiment</button></div></div>
+      <div class="farm-visual"><div class="sun"></div><div class="field-grid" id="fieldGrid"></div></div>
+    </section>
+
+    <section class="grid metrics" id="metrics"></section>
+
+    <section class="glass twin-board" id="twinBoard">
+      <div class="section-head"><h2>Live Digital Twin View</h2><span>Visual farm, crop, mushroom, and greenhouse growth for the active farm.</span></div>
+      <div class="toolbar wrap"><input id="skipDays" type="number" min="1" value="15" title="Days to skip"><select id="skipWeather"><option value="auto">Auto realistic weather</option><option>Sunny</option><option>Cloudy</option><option>Rainy</option><option>Storm</option><option>Heatwave</option><option>Drought</option></select><button id="skipScenario" class="primary">Skip Custom Days</button></div>
+      <div id="visualFarm" class="visual-farm"></div>
+    </section>
+
+    <section class="section glass" data-section="farm">
+      <div class="section-head"><h2>Multi-Farm Digital Twin</h2><span>Every farm has its own crops, units, costs, history, and virtual manager.</span></div>
+      <form id="farmForm" class="form-grid"><input name="name" placeholder="Farm name" required><input name="location" placeholder="Location" required><input name="area" type="number" placeholder="Area (acres)" required><select name="soil"><option>Sandy</option><option>Clay</option><option selected>Loam</option><option>Silt</option><option>Black Soil</option></select><input name="water" placeholder="Water source"><input name="managerName" placeholder="Virtual manager name"><button class="primary">Create Farm</button></form>
+      <div id="farmList" class="cards"></div>
+    </section>
+
+    <section class="section glass" data-section="manager">
+      <div class="section-head"><h2>Virtual Farm Manager</h2><span>One AI-style worker per farm for daily operations and instructions.</span></div>
+      <div id="managerPanel" class="manager-panel"></div>
+      <div class="toolbar wrap"><input id="managerTask" placeholder="Tell the manager what to prioritize e.g. conserve water, maximize profit, reduce disease"><button id="assignManagerTask" class="primary">Assign Task</button><button id="managerAutoPlan" class="secondary">Generate Work Plan</button></div>
+      <div id="managerLog" class="assistant-box"></div>
+    </section>
+
+    <section class="section glass" data-section="crops"><div class="section-head"><h2>Field Crop Farming</h2><button id="plantCrop" class="primary">Plant Crop</button></div><div class="toolbar"><select id="cropSelect"></select><select id="irrigationType"><option>Drip Irrigation</option><option>Sprinkler Irrigation</option><option>Flood Irrigation</option></select><select id="fertilizerType"><option>Urea</option><option>DAP</option><option>NPK</option><option>Organic Compost</option><option>Vermicompost</option></select><button id="startIrrigation" class="secondary">Start Irrigation</button><button id="applyFertilizer" class="secondary">Apply Fertilizer</button><button id="sprayPest" class="ghost">Biological Control</button></div><div id="cropCards" class="cards"></div></section>
+
+    <section class="section glass" data-section="mushrooms"><div class="section-head"><h2>Mushroom Farming</h2><button id="addMushroom" class="primary">Create Unit</button></div><div class="toolbar"><select id="mushroomType"></select><select id="substrate"><option>Wheat Straw</option><option>Paddy Straw</option><option>Compost</option><option>Sawdust</option></select><input id="mTemp" type="number" value="22" title="Temperature"><input id="mHumidity" type="number" value="85" title="Humidity"></div><div id="mushroomCards" class="cards"></div></section>
+
+    <section class="section glass" data-section="greenhouse"><div class="section-head"><h2>Greenhouse Farming</h2><button id="addGreenhouse" class="primary">Add Greenhouse</button></div><div class="toolbar"><select id="greenCrop"></select><input id="ghTemp" type="number" value="24"><input id="ghHum" type="number" value="70"><button id="optimizeGH" class="secondary">Optimize Climate</button></div><div id="greenhouseCards" class="cards"></div></section>
+
+    <section class="section glass" data-section="weather"><div class="section-head"><h2>Weather Simulation Engine</h2><button id="autoWeather" class="primary">Auto Generate Weather</button></div><div class="toolbar wrap"><select id="weatherMode"><option value="auto">Automatic realistic pattern</option><option value="manual">Manual experiment control</option></select><select id="manualWeatherType"><option>Sunny</option><option>Cloudy</option><option>Rainy</option><option>Storm</option><option>Heatwave</option><option>Drought</option></select><input id="manualTemp" type="number" value="30" title="Temperature"><input id="manualHumidity" type="number" value="55" title="Humidity"><input id="manualRain" type="number" value="0" title="Rainfall"><input id="manualWind" type="number" value="10" title="Wind"><input id="manualSun" type="number" value="8" title="Sunlight"><button id="applyManualWeather" class="secondary">Apply Manual Weather</button></div><div id="weatherPanel" class="weather-panel"></div></section>
+
+    <section class="section glass" data-section="experiments"><div class="section-head"><h2>Experiment Laboratory</h2><button id="runExperiment" class="primary">Run Deterministic Comparison</button></div><form id="experimentForm" class="form-grid"><input name="name" placeholder="Experiment name e.g. Reduce irrigation by 20%"><select name="scenario"><option>Reduce irrigation by 20%</option><option>Increase fertilizer by 15%</option><option>Change soil type</option><option>Simulate drought</option><option>Simulate flood</option><option>Change mushroom humidity</option><option>Change greenhouse temperature</option><option>Test organic farming</option></select><input name="value" type="number" value="20"><input name="days" type="number" value="30" title="Simulation days"><button class="secondary">Add Experiment</button></form><div id="experimentCards" class="cards"></div><canvas id="experimentChart" height="120"></canvas></section>
+
+    <section class="section glass" data-section="ai"><div class="section-head"><h2>AI Farm Assistant</h2><button id="saveProvider" class="primary">Save Provider</button></div><div class="form-grid"><input id="apiKey" placeholder="API Key"><input id="baseUrl" placeholder="Base URL (OpenAI/Gemini/local)"><input id="modelName" placeholder="Model name"><select id="quickQuestion"><option>When should I irrigate?</option><option>Why is crop health decreasing?</option><option>What fertilizer should I apply?</option><option>Why are mushrooms growing slowly?</option><option>How can I improve profit?</option></select></div><textarea id="aiQuestion" placeholder="Ask AgriVerse AI..."></textarea><button id="askAI" class="primary">Ask Assistant</button><div id="aiAnswer" class="assistant-box"></div></section>
+
+    <section class="section glass" data-section="economics"><div class="section-head"><h2>Farm Economics & Market Simulation</h2><button id="addCost" class="primary">Add Cost</button></div><div class="toolbar"><select id="costType"><option>Seeds</option><option>Spawn</option><option>Fertilizers</option><option>Pesticides</option><option>Water</option><option>Electricity</option><option>Labor</option><option>Packaging</option><option>Transport</option></select><input id="costAmount" type="number" value="1000"><select id="market"><option>Local Market</option><option>Wholesale Market</option><option>Export Market</option></select></div><div id="economyCards" class="cards"></div></section>
+
+    <section class="section glass" data-section="analytics"><div class="section-head"><h2>Analytics Center</h2><span>Selected farm trends: Growth • Moisture • Disease • Profit • Market</span></div><div class="chart-grid"><canvas id="growthChart"></canvas><canvas id="profitChart"></canvas><canvas id="diseaseChart"></canvas><canvas id="marketChart"></canvas></div></section>
+
+    <section class="section glass" data-section="data"><div class="section-head"><h2>Data Management & Settings</h2></div><div class="toolbar wrap"><button id="exportData" class="primary">Export JSON</button><label class="file">Import JSON<input id="importData" type="file" accept="application/json"></label><button id="backupData" class="secondary">Backup Data</button><button id="restoreData" class="secondary">Restore Data</button><select id="currency"><option>₹</option><option>$</option><option>€</option></select><select id="language"><option>English</option><option>Hindi</option><option>Gujarati</option></select><select id="simSpeed"><option>1 Day</option><option>7 Days</option><option>30 Days</option><option>Custom</option></select></div><pre id="dataPreview"></pre></section>
+  </main>
+  <div id="toasts"></div>
+  <script src="script.js"></script>
+</body>
+</html>
